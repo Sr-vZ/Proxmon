@@ -1,13 +1,30 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
 [project]
 name = "proxmon"
 version = "0.1.0"
-description = "Add your description here"
+description = "A Proxmox monitoring tool with Textual-based TUI"
 readme = "README.md"
 requires-python = ">=3.12"
+license = "MIT"
+authors = [
+    {name = "Sr-vZ", email = "srvz39@gmail.com"}
+]
+keywords = ["proxmox", "monitoring", "tui", "textual", "vm", "lxc"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: System Administrators",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: System :: Monitoring",
+    "Topic :: System :: Systems Administration",
+]
 dependencies = [
     "httpx>=0.28.1",
     "paramiko>=3.5.1",
-    "pip>=25.0.1",
     "psutil>=7.0.0",
     "python-dotenv>=1.0.1",
     "readchar>=4.2.1",
@@ -15,3 +32,18 @@ dependencies = [
     "rich>=13.9.4",
     "textual>=2.1.2",
 ]
+
+[project.scripts]
+proxmon = "proxmon.main:main"
+
+[project.urls]
+Homepage = "https://github.com/Sr-vZ/proxmon"
+Repository = "https://github.com/Sr-vZ/proxmon"
+Issues = "https://github.com/Sr-vZ/proxmon/issues"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["proxmon*"]
+
+[tool.setuptools.package-data]
+proxmon = ["styles.tcss"]

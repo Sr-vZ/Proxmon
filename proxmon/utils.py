@@ -16,6 +16,7 @@ SSH_HOST = os.getenv("SSH_HOST")
 SSH_PORT = int(os.getenv("SSH_PORT", 22))
 SSH_USER = os.getenv("SSH_USER")
 SSH_PASSWORD = os.getenv("SSH_PASSWORD")
+NO_SSL_CHECK = os.getenv("NO_SSL_CHECK", "false").lower() in ("true", "1", "yes", "on")
 
 HEADERS = {"Authorization": f"PVEAPIToken={API_TOKEN_ID}={API_TOKEN_SECRET}"}
 
@@ -45,7 +46,7 @@ def ssh_execute_command(host, username, password, command, port=22):
 # Fetch data from Proxmox API
 def get_data_from_proxapi(url):
     """Fetch data from Proxmox API"""
-    response = requests.get(url, headers=HEADERS, verify=False)
+    response = requests.get(url, headers=HEADERS, verify=not NO_SSL_CHECK)
     response.raise_for_status()
     return response.json()['data']
 
@@ -141,7 +142,7 @@ def draw_vertical_bar_chart(data, height=10, value_width=5,
 
 def get_data_from_proxapi(url):
     """Fetch data from Proxmox API."""
-    response = requests.get(url, headers=HEADERS, verify=False)
+    response = requests.get(url, headers=HEADERS, verify=not NO_SSL_CHECK)
     response.raise_for_status()
     return response.json()['data']
 
