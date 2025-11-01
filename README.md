@@ -13,7 +13,7 @@ Proxmox monitoring cli tool
 
 1. Clone the repository:
     ```bash
-    git clone https://github.com/yourusername/proxmon.git
+    git clone https://github.com/Sr-vZ/Proxmon.git
     ```
 2. Navigate to the project directory:
     ```bash
@@ -26,11 +26,33 @@ Proxmox monitoring cli tool
     uv sync
     ```
 
+## Setup
+### 1. Create a proxmox API Token
+- Login to proxmox and add an api user
+- Add an API token for the api user, write down the secret
+- Grant appropriate permissions to the user and the API token
+### 2. Create .env file
+Note, all SSH_ parameters are optional. If provided, they will allow looking up VMs IP addresses and the host's CPU temperature
+```bash
+PROXMOX_HOST = https://proxmox.myorg.com:8006
+TOKEN_ID = api@pve!api-token
+TOKEN_SECRET = abc12345-6789-defg-1234-1234567890ab
+NODE = proxmox
+SSH_HOST = proxmox.myorg.com
+SSH_PORT = 22
+SSH_USER = api
+SSH_PASSWORD = ssh-password
+```
+    
 ## Usage
 
 Run the tool with:
 ```bash
 python proxmon.py
+```
+or, when using uv:
+```bash
+uv run python proxmon.py
 ```
 ## Demo
 
